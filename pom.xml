@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project 
+    xmlns="http://maven.apache.org/POM/4.0.0" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="
+        http://maven.apache.org/POM/4.0.0 
+        http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <groupId>org.simple</groupId>
+    <artifactId>data-driven-testing</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>${project.name}</name>
+    
+    <properties>
+        <project.name>Data Driven Testing</project.name>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven-compiler-plugin>3.2</maven-compiler-plugin>
+        <maven-shade-plugin.version>2.3</maven-shade-plugin.version>
+        <maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
+        <junit.version>4.11</junit.version>
+        <mockito.version>1.10.8</mockito.version>
+        <assertj.version>3.0.0</assertj.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>data-driven-testing-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>${mockito.version}</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+            
+    <modules>
+        <module>data-driven-testing-api</module>
+        <module>data-driven-testing-core</module>
+        <module>data-driven-testing-camel</module>
+        <module>data-driven-testing-json</module>
+    </modules>
+</project>
