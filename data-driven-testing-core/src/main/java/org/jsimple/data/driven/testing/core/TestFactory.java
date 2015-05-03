@@ -2,15 +2,13 @@ package org.jsimple.data.driven.testing.core;
 
 import org.apache.commons.io.FileUtils;
 import org.jsimple.data.driven.testing.api.Tester;
-import org.jsimple.data.driven.testing.api.interfaces.FileComparator;
-import org.jsimple.data.driven.testing.api.interfaces.ValueOperations;
-import org.jsimple.data.driven.testing.api.interfaces.ValueSaver;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Load;
 import org.jsimple.data.driven.testing.api.structure.Save;
 import org.jsimple.data.driven.testing.core.builder.FolderBuilder;
 import org.jsimple.data.driven.testing.core.builder.ScenarioNameBuilder;
 import org.jsimple.data.driven.testing.core.builder.TesterBuilder;
+import org.jsimple.data.driven.testing.core.builder.Trigger;
 import org.jsimple.data.driven.testing.core.function.CoreTester;
 
 import java.io.File;
@@ -33,17 +31,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by frederic on 25/04/15.
  */
-public class TestFactory
-    implements
-        Tester,
-        ValueOperations<ValueSaver<FileComparator<Tester>>>,
-        ValueSaver<FileComparator<Tester>>,
-        FileComparator<Tester> {
+public class TestFactory implements Tester {
 
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static final class Builder implements TesterBuilder {
+    public static final class Builder
+        implements
+            TesterBuilder,
+            ScenarioNameBuilder<FolderBuilder<Tester>>,
+            FolderBuilder<Tester>,
+            Trigger<Tester> {
 
         private String           testName;
         private String           scenarioName;
@@ -148,14 +146,14 @@ public class TestFactory
     // Public methods
     //--------------------------------------------------------------------------
     @Override
-    public ValueOperations<ValueSaver<FileComparator<Tester>>> value(Object value) {
+    public Tester value(Object value) {
         this.value = Optional.ofNullable(value);
 
         return this;
     }
 
     @Override
-    public <T> ValueOperations<ValueSaver<FileComparator<Tester>>> load(String fileName, Load<T> strategy) throws IOException {
+    public <T> Tester load(String fileName, Load<T> strategy) throws IOException {
         inputResourcePath.toFile().mkdirs();
 
         try (final InputStream inputStream = createInputStream(inputResourcePath, fileName)) {
@@ -168,7 +166,7 @@ public class TestFactory
     }
 
     @Override
-    public <I, O> ValueSaver<FileComparator<Tester>> map(Function<I, O> function) {
+    public <I, O> Tester map(Function<I, O> function) {
         value =
             Optional.ofNullable(
                 value
@@ -180,7 +178,7 @@ public class TestFactory
     }
 
     @Override
-    public <I> ValueSaver<FileComparator<Tester>> apply(Consumer<I> consumer) {
+    public <I> Tester apply(Consumer<I> consumer) {
         consumer.accept(
             value
                 .map((Object value) -> (I) value)
@@ -190,7 +188,7 @@ public class TestFactory
     }
 
     @Override
-    public <I> FileComparator<Tester> save(String fileName, Save<I> strategy) throws IOException {
+    public <I> Tester save(String fileName, Save<I> strategy) throws IOException {
 
         outputTargetPath.toFile().mkdirs();
 
@@ -246,13 +244,13 @@ public class TestFactory
     }
 
     @Override
-    public Tester script(BiConsumer<String, Tester> biConsumer) throws IOException {
+    public Tester scenario(BiConsumer<String, Tester> script) throws IOException {
         final File inputFolder = inputResourcePath.toFile();
         inputFolder.mkdirs();
 
         Arrays
             .asList(inputFolder.list())
-            .forEach((String fileName) -> biConsumer.accept(fileName, this));
+            .forEach((String fileName) -> script.accept(fileName, this));
 
         return this;
     }
@@ -280,14 +278,5 @@ public class TestFactory
         return
             new FileOutputStream(
                 path.resolve(fileName).toFile());
-    }
-
-    private InputStream createInputStream(final File file) {
-        try {
-            return new FileInputStream(file);
-        }
-        catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

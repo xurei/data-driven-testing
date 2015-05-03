@@ -7,6 +7,9 @@
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     
     <modelVersion>4.0.0</modelVersion>
+    <properties>
+        <camel.version>2.14.2</camel.version>
+    </properties>
 
     <parent>
         <groupId>org.simple</groupId>
@@ -17,6 +20,33 @@
     <artifactId>data-driven-testing-camel</artifactId>
     <packaging>jar</packaging>
     <name>${project.name} :: Camel</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.simple</groupId>
+            <artifactId>data-driven-testing-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.simple</groupId>
+            <artifactId>data-driven-testing-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-test</artifactId>
+            <version>${camel.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>

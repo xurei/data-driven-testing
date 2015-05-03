@@ -46,8 +46,5 @@
       </exclusions>
     </dependency>
   </dependencies>
-  <properties>
-    <commons-io.version>2.4</commons-io.version>
-  </properties>
 </project>
 

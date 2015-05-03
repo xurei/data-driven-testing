@@ -14,7 +14,7 @@ public class TextTester {
      *
      * @return
      */
-    public static Load<String> loadText() {
+    public static Load<String> load() {
         return IOUtils::toString;
     }
 
@@ -23,7 +23,7 @@ public class TextTester {
      * @param
      * @return
      */
-    public static Save<String> saveToText() {
+    public static Save<String> save() {
         return IOUtils::write;
     }
 
@@ -31,7 +31,7 @@ public class TextTester {
      *
      * @return
      */
-    public static Comparison compareText() {
+    public static Comparison compare() {
         return IOUtils::contentEquals;
     }
 }

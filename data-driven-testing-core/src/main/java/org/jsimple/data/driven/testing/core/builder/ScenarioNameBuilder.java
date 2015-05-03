@@ -6,7 +6,7 @@ package org.jsimple.data.driven.testing.core.builder;
 public interface ScenarioNameBuilder<O> {
 
     /**
-     * Defines scenario name
+     * Defines script name
      * @param scenarioName
      * @return
      */

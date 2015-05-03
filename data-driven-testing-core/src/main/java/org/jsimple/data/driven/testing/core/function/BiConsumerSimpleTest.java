@@ -42,6 +42,6 @@ public class BiConsumerSimpleTest<I, O>
     //--------------------------------------------------------------------------
     @Override
     public void accept(String fileName, Tester tester) {
-        scenario(fileName, tester);
+        script(fileName, tester);
     }
 }

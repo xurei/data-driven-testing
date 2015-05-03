@@ -18,6 +18,7 @@
         <project.name>Data Driven Testing</project.name>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <commons-io.version>2.4</commons-io.version>
         <maven-compiler-plugin>3.2</maven-compiler-plugin>
         <maven-shade-plugin.version>2.3</maven-shade-plugin.version>
         <maven-surefire-plugin.version>2.15</maven-surefire-plugin.version>
@@ -32,6 +33,17 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>data-driven-testing-api</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>data-driven-testing-core</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>

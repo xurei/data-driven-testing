@@ -59,6 +59,6 @@ public class ConsumerSimpleTest<I, O>
     //--------------------------------------------------------------------------
     @Override
     public void accept(Tester tester) {
-        scenario(fileName, tester);
+        script(fileName, tester);
     }
 }

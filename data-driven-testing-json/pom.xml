@@ -18,6 +18,45 @@
     <packaging>jar</packaging>
     <name>${project.name} :: Json</name>
 
+    <properties>
+        <jsonassert.version>1.2.3</jsonassert.version>
+        <jackson.version>2.4.3</jackson.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.simple</groupId>
+            <artifactId>data-driven-testing-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.simple</groupId>
+            <artifactId>data-driven-testing-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.skyscreamer</groupId>
+            <artifactId>jsonassert</artifactId>
+            <version>${jsonassert.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>

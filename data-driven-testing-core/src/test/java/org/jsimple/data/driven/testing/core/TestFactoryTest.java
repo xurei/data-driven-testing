@@ -12,7 +12,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -36,8 +35,8 @@ public class TestFactoryTest {
                 .begin()
                     .value("whatever the value")
                     .map((String value) -> value.toUpperCase())
-                    .save(fileName, TextTester.saveToText())
-                    .compare(fileName, TextTester.compareText());
+                    .save(fileName, TextTester.save())
+                    .compare(fileName, TextTester.compare());
 
         try {
             tester.end();
@@ -72,8 +71,8 @@ public class TestFactoryTest {
                 .value(value)
                 .apply((Map<String, Object> map) -> map.put("three", 3))
                 .map(Object::toString)
-                .save("map.txt", TextTester.saveToText())
-                .compare("map.txt", TextTester.compareText())
+                .save("map.txt", TextTester.save())
+                .compare("map.txt", TextTester.compare())
                 .end();
     }
 
@@ -84,10 +83,10 @@ public class TestFactoryTest {
             .name(TEST_NAME)
             .scenario("from-file")
             .begin()
-                .load("input.txt", TextTester.loadText())
+                .load("input.txt", TextTester.load())
                 .map((String value) -> value.toUpperCase())
-                .save("output.txt", TextTester.saveToText())
-                .compare("output.txt", TextTester.compareText())
+                .save("output.txt", TextTester.save())
+                .compare("output.txt", TextTester.compare())
                 .end();
     }
 
@@ -96,32 +95,31 @@ public class TestFactoryTest {
 
         TestFactory.createTest()
             .name(TEST_NAME)
-            .scenario("single-script")
+            .scenario("script")
             .begin()
                 .script(
-                    CoreTester.<String, String>singleScenario()
-                        .fileName("one.txt")
-                        .load(TextTester.loadText())
+                    CoreTester.<String, String>script("one.txt")
+                        .load(TextTester.load())
                         .function(String::toUpperCase)
-                        .save(TextTester.saveToText())
-                        .comparison(TextTester.compareText())
+                        .save(TextTester.save())
+                        .comparison(TextTester.compare())
                         .build())
                 .end();
     }
 
     @Test
-    public void testScriptOnEachFile() throws IOException {
+    public void testScenario() throws IOException {
 
         TestFactory.createTest()
             .name(TEST_NAME)
-            .scenario("multiple-script")
+            .scenario("scenario")
             .begin()
-                .script(
-                    CoreTester.<String, String>scenarioScript()
-                        .load(TextTester.loadText())
+                .scenario(
+                    CoreTester.<String, String>script()
+                        .load(TextTester.load())
                         .function(String::toUpperCase)
-                        .save(TextTester.saveToText())
-                        .comparison(TextTester.compareText())
+                        .save(TextTester.save())
+                        .comparison(TextTester.compare())
                         .build())
                 .end();
     }

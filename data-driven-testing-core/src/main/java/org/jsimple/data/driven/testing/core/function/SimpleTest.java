@@ -1,6 +1,9 @@
 package org.jsimple.data.driven.testing.core.function;
 
 import org.jsimple.data.driven.testing.api.Tester;
+import org.jsimple.data.driven.testing.api.interfaces.ComparisonBuilder;
+import org.jsimple.data.driven.testing.api.interfaces.FunctionBuilder;
+import org.jsimple.data.driven.testing.api.interfaces.SaveBuilder;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Load;
 import org.jsimple.data.driven.testing.api.structure.Save;
@@ -18,7 +21,13 @@ public abstract class SimpleTest<I, O> {
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static abstract class Builder<I, O, B extends Builder<I, O, B>> {
+    public static abstract class Builder<I, O, B
+        extends Builder<I, O, B>>
+        implements
+            SimpleTestBuilder<I, O, B>,
+            FunctionBuilder<I, O, SaveBuilder<O, ComparisonBuilder<B>>>,
+            SaveBuilder<O, ComparisonBuilder<B>>,
+            ComparisonBuilder<B> {
 
         private Load<I>        load;
         private Save<O>        save;
@@ -76,7 +85,7 @@ public abstract class SimpleTest<I, O> {
     //--------------------------------------------------------------------------
     // Public methods
     //--------------------------------------------------------------------------
-    public void scenario(final String fileName, final Tester tester) {
+    public void script(final String fileName, final Tester tester) {
         try {
             tester
                 .load(fileName, load)
