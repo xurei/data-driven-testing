@@ -7,9 +7,6 @@
         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     
     <modelVersion>4.0.0</modelVersion>
-    <properties>
-        <camel.version>2.14.2</camel.version>
-    </properties>
 
     <parent>
         <groupId>org.simple</groupId>
@@ -20,6 +17,10 @@
     <artifactId>data-driven-testing-camel</artifactId>
     <packaging>jar</packaging>
     <name>${project.name} :: Camel</name>
+
+    <properties>
+        <camel.version>2.14.2</camel.version>
+    </properties>
 
     <dependencies>
         <dependency>

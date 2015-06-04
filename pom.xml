@@ -70,5 +70,6 @@
         <module>data-driven-testing-core</module>
         <module>data-driven-testing-camel</module>
         <module>data-driven-testing-json</module>
+        <module>data-driven-testing-database</module>
     </modules>
 </project>
