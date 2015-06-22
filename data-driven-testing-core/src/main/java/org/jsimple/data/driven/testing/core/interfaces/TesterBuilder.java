@@ -1,4 +1,4 @@
-package org.jsimple.data.driven.testing.core.builder;
+package org.jsimple.data.driven.testing.core.interfaces;
 
 import org.jsimple.data.driven.testing.api.Tester;
 

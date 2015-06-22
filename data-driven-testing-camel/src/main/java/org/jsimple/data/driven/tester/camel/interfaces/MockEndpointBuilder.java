@@ -1,4 +1,4 @@
-package org.jsimple.data.driven.tester.camel.function;
+package org.jsimple.data.driven.tester.camel.interfaces;
 
 import org.apache.camel.component.mock.MockEndpoint;
 

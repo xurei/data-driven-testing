@@ -7,6 +7,7 @@ import org.jsimple.data.driven.testing.api.interfaces.SaveBuilder;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Load;
 import org.jsimple.data.driven.testing.api.structure.Save;
+import org.jsimple.data.driven.testing.core.interfaces.SimpleTestBuilder;
 
 import java.io.IOException;
 import java.util.function.Function;
@@ -24,7 +25,7 @@ public abstract class SimpleTest<I, O> {
     public static abstract class Builder<I, O, B
         extends Builder<I, O, B>>
         implements
-            SimpleTestBuilder<I, O, B>,
+        SimpleTestBuilder<I, O, B>,
             FunctionBuilder<I, O, SaveBuilder<O, ComparisonBuilder<B>>>,
             SaveBuilder<O, ComparisonBuilder<B>>,
             ComparisonBuilder<B> {

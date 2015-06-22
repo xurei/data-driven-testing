@@ -5,10 +5,10 @@ import org.jsimple.data.driven.testing.api.Tester;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Load;
 import org.jsimple.data.driven.testing.api.structure.Save;
-import org.jsimple.data.driven.testing.core.builder.FolderBuilder;
-import org.jsimple.data.driven.testing.core.builder.ScenarioNameBuilder;
-import org.jsimple.data.driven.testing.core.builder.TesterBuilder;
-import org.jsimple.data.driven.testing.core.builder.Trigger;
+import org.jsimple.data.driven.testing.core.interfaces.FolderBuilder;
+import org.jsimple.data.driven.testing.core.interfaces.ScenarioNameBuilder;
+import org.jsimple.data.driven.testing.core.interfaces.TesterBuilder;
+import org.jsimple.data.driven.testing.core.interfaces.Trigger;
 import org.jsimple.data.driven.testing.core.function.CoreTester;
 
 import java.io.File;

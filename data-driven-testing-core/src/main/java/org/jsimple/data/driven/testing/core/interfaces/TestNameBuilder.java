@@ -1,4 +1,4 @@
-package org.jsimple.data.driven.testing.core.builder;
+package org.jsimple.data.driven.testing.core.interfaces;
 
 /**
  * Created by frederic on 26/04/15.

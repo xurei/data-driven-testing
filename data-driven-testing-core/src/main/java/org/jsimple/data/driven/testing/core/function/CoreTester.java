@@ -1,6 +1,7 @@
 package org.jsimple.data.driven.testing.core.function;
 
 import org.jsimple.data.driven.testing.api.exceptions.NoValueException;
+import org.jsimple.data.driven.testing.core.interfaces.SimpleTestBuilder;
 
 /**
  * Created by frederic on 26/04/15.
@@ -13,6 +14,14 @@ public class CoreTester {
      */
     public static NoValueException noValue() {
         return new NoValueException("No value defined, use Tester::value or Tester::load methods");
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public static ExpectException.Builder expectException() {
+        return ExpectException.newBuilder();
     }
 
     /**

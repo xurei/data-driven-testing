@@ -10,7 +10,7 @@ public class CamelTester {
      * @param <I>
      * @return
      */
-    public static <I> SaveMockEndpoint.Builder<I, DefaultSaveMockEndpoint.Builder<I>> saveMockEndpoint() {
-        return DefaultSaveMockEndpoint.newBuilder();
+    public static <I> SaveMockEndpoint.Builder<I> saveMockEndpoint() {
+        return SaveMockEndpoint.newBuilder();
     }
 }

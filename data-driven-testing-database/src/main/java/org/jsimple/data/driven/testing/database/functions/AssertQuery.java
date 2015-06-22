@@ -2,6 +2,7 @@ package org.jsimple.data.driven.testing.database.functions;
 
 import org.assertj.core.api.Assertions;
 import org.jsimple.data.driven.testing.api.Tester;
+import org.jsimple.data.driven.testing.api.interfaces.SaveBuilder;
 import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Save;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +20,11 @@ import static org.assertj.core.api.Assertions.fail;
  */
 public class AssertQuery implements Consumer<Tester> {
 
-    public static final class Builder {
+    public static final class Builder
+        implements
+            SaveBuilder<Collection<Map<String, Object>>, Builder> {
+
+
         private DataSource dataSource;
         private String query;
         private String fileName;

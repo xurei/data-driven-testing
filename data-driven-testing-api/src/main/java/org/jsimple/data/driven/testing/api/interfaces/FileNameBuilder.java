@@ -1,7 +1,7 @@
-package org.jsimple.data.driven.tester.camel.function;
+package org.jsimple.data.driven.testing.api.interfaces;
 
 /**
- * Created by frederic on 01/05/15.
+ * Created by frederic on 05/06/15.
  */
 public interface FileNameBuilder<R> {
 

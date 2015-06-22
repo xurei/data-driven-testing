@@ -56,7 +56,6 @@ public class Execute implements Runnable {
     @Override
     public void run() {
         final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        orders.forEach(
-            jdbcTemplate::execute);
+        orders.forEach(jdbcTemplate::execute);
     }
 }

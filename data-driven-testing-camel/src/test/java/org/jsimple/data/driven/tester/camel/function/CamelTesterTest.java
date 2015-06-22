@@ -1,6 +1,5 @@
 package org.jsimple.data.driven.tester.camel.function;
 
-import org.apache.camel.CamelContext;
 import org.apache.camel.EndpointInject;
 import org.apache.camel.Produce;
 import org.apache.camel.ProducerTemplate;
@@ -8,7 +7,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.junit4.CamelTestSupport;
 import org.jsimple.data.driven.testing.core.TestFactory;
-import org.jsimple.data.driven.testing.core.function.CoreTester;
 import org.jsimple.data.driven.testing.core.function.TextTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +14,6 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Map;
 
 /**
  * Created by frederic on 02/05/15.
