@@ -17,7 +17,7 @@ public class DatabaseTester {
      *
      * @return
      */
-    public static AssertQuery.Builder assertQuery() {
-        return AssertQuery.newBuilder();
+    public static Query.Builder query() {
+        return Query.newBuilder();
     }
 }

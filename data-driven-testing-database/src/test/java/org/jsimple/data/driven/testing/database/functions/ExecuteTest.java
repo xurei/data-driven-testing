@@ -25,8 +25,8 @@ public class ExecuteTest {
 
         DatabaseTester.execute()
             .dataSource(dataSource)
-            .order("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('John', 'Doe')")
-            .order("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('Johnathan', 'Smith')")
+            .sql("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('John', 'Doe')")
+            .sql("INSERT INTO TEST (FIRST_NAME, LAST_NAME) VALUES ('Johnathan', 'Smith')")
             .build()
                 .run();
 

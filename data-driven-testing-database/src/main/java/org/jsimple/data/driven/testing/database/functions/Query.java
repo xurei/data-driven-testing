@@ -1,17 +1,17 @@
 package org.jsimple.data.driven.testing.database.functions;
 
+import org.jsimple.data.driven.testing.api.Tester;
 import org.jsimple.data.driven.testing.database.interfaces.DataSourceBuilder;
 import org.jsimple.data.driven.testing.database.interfaces.SQLBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.function.Consumer;
 
 /**
  * Created by frederic on 03/06/15.
  */
-public class Execute implements Runnable {
+public class Query implements Consumer<Tester> {
 
     public static final class Builder
         implements
@@ -19,10 +19,9 @@ public class Execute implements Runnable {
             SQLBuilder<Builder> {
 
         private DataSource dataSource;
-        private Collection<String> orders;
+        private String query;
 
         private Builder() {
-            orders = new ArrayList<>();
         }
 
         @Override
@@ -32,13 +31,13 @@ public class Execute implements Runnable {
         }
 
         @Override
-        public Builder sql(String order) {
-            orders.add(order);
+        public Builder sql(String query) {
+            this.query = query;
             return this;
         }
 
-        public Execute build() {
-            return new Execute(this);
+        public Query build() {
+            return new Query(this);
         }
     }
 
@@ -46,25 +45,26 @@ public class Execute implements Runnable {
         return new Builder();
     }
 
-    public static Builder newBuilder(Execute copy) {
+    public static Builder newBuilder(Query copy) {
         Builder builder = new Builder();
         builder.dataSource = copy.dataSource;
-        builder.orders = new ArrayList<>(copy.orders);
+        builder.query = copy.query;
+
         return builder;
     }
 
     private final DataSource dataSource;
-    private final Collection<String> orders;
+    private final String query;
 
-    private Execute(Builder builder) {
+    private Query(Builder builder) {
         dataSource = builder.dataSource;
-        orders = builder.orders;
+        query = builder.query;
     }
 
     @Override
-    public void run() {
-        final JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-
-        orders.forEach(jdbcTemplate::execute);
+    public void accept(Tester tester) {
+        tester.value(
+            new JdbcTemplate(dataSource)
+                .queryForList(query));
     }
 }
