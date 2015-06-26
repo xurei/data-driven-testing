@@ -8,9 +8,22 @@ import org.junit.Test;
 public class ExpectExceptionTest {
 
     @Test
-    public void testAccept() throws Exception {
+    public void testOk() throws Exception {
 
-        final CoreTester.()
-            .
+        CoreTester.expectException()
+            .exception(RuntimeException.class)
+            .causedBy(IndexOutOfBoundsException.class)
+            .build()
+            .accept(new RuntimeException(new IndexOutOfBoundsException()));
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testNotOk() throws Exception {
+
+        CoreTester.expectException()
+            .exception(RuntimeException.class)
+            .causedBy(IndexOutOfBoundsException.class)
+            .build()
+            .accept(new RuntimeException());
     }
 }

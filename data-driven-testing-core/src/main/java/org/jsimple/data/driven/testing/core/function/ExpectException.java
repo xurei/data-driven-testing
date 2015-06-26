@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.jsimple.data.driven.testing.core.interfaces.CausedByBuilder;
 import org.jsimple.data.driven.testing.core.interfaces.ExpectExceptionBuilder;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Consumer;
@@ -62,12 +63,14 @@ public class ExpectException implements Consumer<Exception> {
 
         Throwable currentException = e;
         for (final Class<? extends Throwable> expectedType : exceptions) {
-            Assertions.assertThat(e).isInstanceOf(expectedType);
+            Assertions
+                .assertThat(currentException)
+                .overridingErrorMessage(MessageFormat.format("expected exception {0}", expectedType.getClass()))
+                .isNotNull();
+
+            Assertions.assertThat(currentException).isInstanceOf(expectedType);
 
             currentException = currentException.getCause();
-            if (currentException == null) {
-                break;
-            }
         }
     }
 
