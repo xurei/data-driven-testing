@@ -48,11 +48,12 @@ public class CamelTesterTest extends CamelTestSupport {
                 .value(Arrays.asList("one", "two"))
                 .apply((Collection<String> col) -> source.sendBody(col))
                 .script(
-                    CamelTester.<String>saveMockEndpoint()
+                    CamelTester.<String>compareMockEndpoint()
                         .mockEndpoint(destination)
                         .fileName("string.txt")
                         .type(String.class)
                         .save(TextTester.save())
+                        .comparison(TextTester.compare())
                         .build())
                 .compare("0-string.txt", TextTester.compare())
                 .compare("1-string.txt", TextTester.compare())

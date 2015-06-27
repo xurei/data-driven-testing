@@ -4,9 +4,11 @@ import org.apache.camel.Exchange;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.jsimple.data.driven.tester.camel.interfaces.MockEndpointBuilder;
 import org.jsimple.data.driven.testing.api.Tester;
+import org.jsimple.data.driven.testing.api.interfaces.ComparisonBuilder;
 import org.jsimple.data.driven.testing.api.interfaces.FileNameBuilder;
 import org.jsimple.data.driven.testing.api.interfaces.SaveBuilder;
 import org.jsimple.data.driven.testing.api.interfaces.TypeBuilder;
+import org.jsimple.data.driven.testing.api.structure.Comparison;
 import org.jsimple.data.driven.testing.api.structure.Save;
 
 import java.io.IOException;
@@ -18,49 +20,57 @@ import static org.assertj.core.api.Assertions.fail;
 /**
  * Created by frederic on 01/05/15.
  */
-public class SaveMockEndpoint<I> implements Consumer<Tester> {
+public class CompareMockEndpoint<I> implements Consumer<Tester> {
 
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
     public static final class Builder<I>
         implements
-            MockEndpointBuilder<FileNameBuilder<TypeBuilder<I, SaveBuilder<I, Builder<I>>>>>,
-            FileNameBuilder<TypeBuilder<I, SaveBuilder<I, Builder<I>>>>,
-            TypeBuilder<I, SaveBuilder<I, Builder<I>>>,
-            SaveBuilder<I, Builder<I>> {
+            MockEndpointBuilder<FileNameBuilder<TypeBuilder<I, SaveBuilder<I, ComparisonBuilder<Builder<I>>>>>>,
+            FileNameBuilder<TypeBuilder<I, SaveBuilder<I, ComparisonBuilder<Builder<I>>>>>,
+            TypeBuilder<I, SaveBuilder<I, ComparisonBuilder<Builder<I>>>>,
+            SaveBuilder<I, ComparisonBuilder<Builder<I>>>,
+            ComparisonBuilder<Builder<I>> {
 
-        private MockEndpoint mockEndpoint;
-        private Class<I>     type;
-        private Save<I>      save;
-        private String       fileName;
+        private MockEndpoint    mockEndpoint;
+        private Class<I>        type;
+        private String          fileName;
+        private Save<I>         save;
+        private Comparison      comparison;
 
         private Builder() {
         }
 
-        public Builder<I> mockEndpoint(final MockEndpoint mockEndpoint) {
+        public FileNameBuilder<TypeBuilder<I, SaveBuilder<I, ComparisonBuilder<Builder<I>>>>> mockEndpoint(final MockEndpoint mockEndpoint) {
             this.mockEndpoint = mockEndpoint;
 
             return this;
         }
 
-        public Builder<I> fileName(final String fileName) {
+        public TypeBuilder<I, SaveBuilder<I, ComparisonBuilder<Builder<I>>>> fileName(final String fileName) {
             this.fileName = fileName;
             return this;
         }
 
-        public Builder<I> type(final Class<I> type) {
+        public SaveBuilder<I, ComparisonBuilder<Builder<I>>> type(final Class<I> type) {
             this.type = type;
             return this;
         }
 
-        public Builder<I> save(final Save<I> save) {
+        public ComparisonBuilder<Builder<I>> save(final Save<I> save) {
             this.save = save;
             return this;
         }
 
-        public SaveMockEndpoint<I> build() {
-            return new SaveMockEndpoint<>(this);
+        @Override
+        public Builder<I> comparison(Comparison comparison) {
+            this.comparison = comparison;
+            return this;
+        }
+
+        public CompareMockEndpoint<I> build() {
+            return new CompareMockEndpoint<>(this);
         }
     }
 
@@ -73,14 +83,14 @@ public class SaveMockEndpoint<I> implements Consumer<Tester> {
     //--------------------------------------------------------------------------
     private final MockEndpoint mockEndpoint;
     private final Class<I>     type;
-    private final Save<I>      save;
     private final String       fileName;
+    private final Save<I>      save;
 
-    private SaveMockEndpoint(Builder builder) {
+    private CompareMockEndpoint(Builder builder) {
         mockEndpoint    = builder.mockEndpoint;
         type            = builder.type;
-        save            = builder.save;
         fileName        = builder.fileName;
+        save            = builder.save;
     }
 
     //--------------------------------------------------------------------------
