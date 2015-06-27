@@ -11,9 +11,9 @@ As a modern software, it follows some of the most modern principles as:
 * fluent API for user-friendliness
 * functional design with high order functions for extensibility
 * builder pattern for construction clarity and immutability
-* independent modules as much as possible
+* independent modules as key concept
 
-## Theory
+## Principle
 
 A test scenario is a sequence of actions that describes the scenario itself. Actions
 are primitive operations such as:
@@ -24,8 +24,9 @@ are primitive operations such as:
 * saving the result to file
 * comparing saved output file to output resource file
 
-You can also create your own scenario as a function or even your script for all
-input resource files.
+You can also create your own script as a function or even your own scenario for all
+input resource files. The only thing you have to do is describe your test and create input data.
 
 ## Practice
 
+To do
