@@ -25,7 +25,7 @@ public abstract class SimpleTest<I, O> {
     public static abstract class Builder<I, O, B
         extends Builder<I, O, B>>
         implements
-        SimpleTestBuilder<I, O, B>,
+            SimpleTestBuilder<I, O, B>,
             FunctionBuilder<I, O, SaveBuilder<O, ComparisonBuilder<B>>>,
             SaveBuilder<O, ComparisonBuilder<B>>,
             ComparisonBuilder<B> {

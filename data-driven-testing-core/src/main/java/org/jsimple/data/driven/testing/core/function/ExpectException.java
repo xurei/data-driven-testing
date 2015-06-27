@@ -42,11 +42,11 @@ public class ExpectException implements Consumer<Exception> {
         }
     }
 
-    public static Builder newBuilder() {
+    public static ExpectExceptionBuilder<Builder> newBuilder() {
         return new Builder();
     }
 
-    public static Builder newBuilder(ExpectException copy) {
+    public static ExpectExceptionBuilder<Builder> newBuilder(ExpectException copy) {
         Builder builder = new Builder();
         builder.exceptions = copy.exceptions;
         return builder;

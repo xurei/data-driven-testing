@@ -1,6 +1,7 @@
 package org.jsimple.data.driven.testing.core.function;
 
 import org.jsimple.data.driven.testing.api.exceptions.NoValueException;
+import org.jsimple.data.driven.testing.core.interfaces.ExpectExceptionBuilder;
 import org.jsimple.data.driven.testing.core.interfaces.SimpleTestBuilder;
 
 /**
@@ -20,7 +21,7 @@ public class CoreTester {
      * 
      * @return
      */
-    public static ExpectException.Builder expectException() {
+    public static ExpectExceptionBuilder<ExpectException.Builder> expectException() {
         return ExpectException.newBuilder();
     }
 
