@@ -1,0 +1,10 @@
+{
+  "headers" : {
+    "server" : [ "Restlet-Framework/2.3.3" ],
+    "content-length" : [ "50" ],
+    "content-type" : [ "application/json; charset=UTF-8" ],
+    "vary" : [ "Accept-Charset, Accept-Encoding, Accept-Language, Accept" ]
+  },
+  "body" : "{\"message\":{\"body\":\"hello world\",\"status\":\"OK\"}}",
+  "status" : 200
+}

@@ -41,6 +41,12 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>data-driven-testing-json</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${commons-io.version}</version>
@@ -71,5 +77,6 @@
         <module>data-driven-testing-camel</module>
         <module>data-driven-testing-json</module>
         <module>data-driven-testing-database</module>
+        <module>data-driven-testing-webservices</module>
     </modules>
 </project>
