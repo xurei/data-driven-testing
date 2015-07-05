@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.fail;
 /**
  * Created by frederic on 01/05/15.
  */
-public class CompareMockEndpoint<I> implements Consumer<Tester> {
+public class VerifyMockEndpoint<I> implements Consumer<Tester> {
 
     //--------------------------------------------------------------------------
     // Builder
@@ -69,8 +69,8 @@ public class CompareMockEndpoint<I> implements Consumer<Tester> {
             return this;
         }
 
-        public CompareMockEndpoint<I> build() {
-            return new CompareMockEndpoint<>(this);
+        public VerifyMockEndpoint<I> build() {
+            return new VerifyMockEndpoint<>(this);
         }
     }
 
@@ -86,7 +86,7 @@ public class CompareMockEndpoint<I> implements Consumer<Tester> {
     private final String       fileName;
     private final Save<I>      save;
 
-    private CompareMockEndpoint(Builder builder) {
+    private VerifyMockEndpoint(Builder builder) {
         mockEndpoint    = builder.mockEndpoint;
         type            = builder.type;
         fileName        = builder.fileName;

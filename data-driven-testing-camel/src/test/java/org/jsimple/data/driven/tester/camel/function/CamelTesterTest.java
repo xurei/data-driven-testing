@@ -48,7 +48,7 @@ public class CamelTesterTest extends CamelTestSupport {
                 .value(Arrays.asList("one", "two"))
                 .apply((Collection<String> col) -> source.sendBody(col))
                 .script(
-                    CamelTester.<String>compareMockEndpoint()
+                    CamelTester.<String>verifyMockEndpoint()
                         .mockEndpoint(destination)
                         .fileName("string.txt")
                         .type(String.class)

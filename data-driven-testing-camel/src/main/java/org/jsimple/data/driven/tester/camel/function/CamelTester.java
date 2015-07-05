@@ -10,7 +10,7 @@ public class CamelTester {
      * @param <I>
      * @return
      */
-    public static <I> CompareMockEndpoint.Builder<I> compareMockEndpoint() {
-        return CompareMockEndpoint.newBuilder();
+    public static <I> VerifyMockEndpoint.Builder<I> verifyMockEndpoint() {
+        return VerifyMockEndpoint.newBuilder();
     }
 }
