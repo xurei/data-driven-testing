@@ -13,7 +13,7 @@ import java.util.function.Consumer;
  */
 public class Query implements Consumer<Tester> {
 
-    public static final class Builder
+    public static class Builder
         implements
             DataSourceBuilder<SQLBuilder<Builder>>,
             SQLBuilder<Builder> {

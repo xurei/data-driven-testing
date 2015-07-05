@@ -13,7 +13,7 @@ import java.util.Collection;
  */
 public class Execute implements Runnable {
 
-    public static final class Builder
+    public static class Builder
         implements
             DataSourceBuilder<SQLBuilder<Builder>>,
             SQLBuilder<Builder> {
