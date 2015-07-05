@@ -31,10 +31,8 @@ public class CoreTester {
      * @param <O>
      * @return
      */
-    public static <I, O> SimpleTestBuilder<I, O, ConsumerSimpleTest.Builder<I, O>> script(final String fileName) {
-        return
-            ConsumerSimpleTest.<I, O>newBuilder()
-                .fileName(fileName);
+    public static <I, O> SimpleTestBuilder<I, O, ConsumerSimpleTest.Builder<I, O>> script() {
+        return ConsumerSimpleTest.<I, O>newBuilder();
     }
 
     /**
@@ -43,7 +41,7 @@ public class CoreTester {
      * @param <O>
      * @return
      */
-    public static <I, O> SimpleTestBuilder<I, O, BiConsumerSimpleTest.Builder<I, O>> script() {
+    public static <I, O> SimpleTestBuilder<I, O, BiConsumerSimpleTest.Builder<I, O>> scenario() {
         return BiConsumerSimpleTest.<I, O>newBuilder();
     }
 }
