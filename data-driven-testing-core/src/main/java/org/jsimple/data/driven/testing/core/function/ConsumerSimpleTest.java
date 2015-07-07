@@ -1,6 +1,8 @@
 package org.jsimple.data.driven.testing.core.function;
 
 import org.jsimple.data.driven.testing.api.Tester;
+import org.jsimple.data.driven.testing.core.interfaces.FileNameBuilder;
+import org.jsimple.data.driven.testing.core.interfaces.SimpleTestBuilder;
 
 import java.util.function.Consumer;
 
@@ -14,7 +16,9 @@ public class ConsumerSimpleTest<I, O>
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static class Builder<I, O> extends SimpleTest.Builder<I, O, Builder<I, O>> {
+    public static class Builder<I, O>
+        extends SimpleTest.Builder<I, O, Builder<I, O>>
+        implements FileNameBuilder<SimpleTestBuilder<I, O, Builder<I, O>>> {
 
         private String fileName;
 
@@ -25,6 +29,7 @@ public class ConsumerSimpleTest<I, O>
             return this;
         }
 
+        @Override
         public Builder<I, O> fileName(String fileName) {
             this.fileName = fileName;
 
@@ -48,10 +53,10 @@ public class ConsumerSimpleTest<I, O>
     //--------------------------------------------------------------------------
     // Constructor
     //--------------------------------------------------------------------------
-    private ConsumerSimpleTest(Builder builder) {
+    private ConsumerSimpleTest(Builder<I, O> builder) {
         super(builder);
 
-        this.fileName = builder.fileName;
+        fileName = builder.fileName;
     }
 
     //--------------------------------------------------------------------------

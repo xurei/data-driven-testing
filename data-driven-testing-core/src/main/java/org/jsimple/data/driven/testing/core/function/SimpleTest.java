@@ -22,8 +22,7 @@ public abstract class SimpleTest<I, O> {
     //--------------------------------------------------------------------------
     // Builder
     //--------------------------------------------------------------------------
-    public static abstract class Builder<I, O, B
-        extends Builder<I, O, B>>
+    public static abstract class Builder<I, O, B extends Builder<I, O, B>>
         implements
             SimpleTestBuilder<I, O, B>,
             FunctionBuilder<I, O, SaveBuilder<O, ComparisonBuilder<B>>>,
@@ -46,8 +45,8 @@ public abstract class SimpleTest<I, O> {
             return self();
         }
 
-        public B function(final Function<I, O> mapping) {
-            this.function = mapping;
+        public B function(final Function<I, O> function) {
+            this.function = function;
 
             return self();
         }

@@ -2,6 +2,7 @@ package org.jsimple.data.driven.testing.core.function;
 
 import org.jsimple.data.driven.testing.api.exceptions.NoValueException;
 import org.jsimple.data.driven.testing.core.interfaces.ExpectExceptionBuilder;
+import org.jsimple.data.driven.testing.core.interfaces.FileNameBuilder;
 import org.jsimple.data.driven.testing.core.interfaces.SimpleTestBuilder;
 
 /**
@@ -31,7 +32,7 @@ public class CoreTester {
      * @param <O>
      * @return
      */
-    public static <I, O> SimpleTestBuilder<I, O, ConsumerSimpleTest.Builder<I, O>> script() {
+    public static <I, O> FileNameBuilder<SimpleTestBuilder<I, O, ConsumerSimpleTest.Builder<I, O>>> script() {
         return ConsumerSimpleTest.<I, O>newBuilder();
     }
 

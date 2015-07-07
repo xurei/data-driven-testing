@@ -98,7 +98,8 @@ public class TestFactoryTest {
             .scenario("script")
             .begin()
                 .script(
-                    CoreTester.<String, String>script("one.txt")
+                    CoreTester.<String, String>script()
+                        .fileName("one.txt")
                         .load(TextTester.load())
                         .function(String::toUpperCase)
                         .save(TextTester.save())
@@ -115,7 +116,7 @@ public class TestFactoryTest {
             .scenario("scenario")
             .begin()
                 .scenario(
-                    CoreTester.<String, String>script()
+                    CoreTester.<String, String>scenario()
                         .load(TextTester.load())
                         .function(String::toUpperCase)
                         .save(TextTester.save())
