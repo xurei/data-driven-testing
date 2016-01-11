@@ -18,6 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.StringBuilder;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -25,6 +26,11 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import difflib.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -209,6 +215,7 @@ public class TestFactory implements Tester {
         Boolean errors = false;
 
         outputResourcePath.toFile().mkdirs();
+        final File resourceFile = outputResourcePath.resolve(fileName).toFile();
         final File targetFile = outputTargetPath.resolve(fileName).toFile();
 
         try (
@@ -231,6 +238,19 @@ public class TestFactory implements Tester {
                     targetFile,
                     errorTargetFolder,
                     true);
+                final File errorTargetFile = FileUtils.getFile(errorTargetFolder, targetFile.getName());
+
+                List<String> expected = fileToLines(resourceFile);
+                List<String> obtained = fileToLines(errorTargetFile);
+
+                // Compute diff. Get the Patch object. Patch is the container for computed deltas.
+                Patch patch = DiffUtils.diff(expected, obtained);
+
+                StringBuilder sb = new StringBuilder();
+                for (Delta delta: patch.getDeltas()) {
+                    System.err.println(delta);
+                }
+                //assertThat(false).overridingErrorMessage(sb.toString()).isTrue();
             }
         }
     }
@@ -278,5 +298,20 @@ public class TestFactory implements Tester {
         return
             new FileOutputStream(
                 path.resolve(fileName).toFile());
+    }
+
+    // Helper method for get the file content
+    private static List<String> fileToLines(File file) {
+        List<String> lines = new ArrayList<String>();
+        String line = "";
+        try {
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            while ((line = in.readLine()) != null) {
+                lines.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
     }
 }
